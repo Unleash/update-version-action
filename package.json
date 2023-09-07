@@ -25,7 +25,7 @@
     "url": "https://github.com/Unleash/update-version-action/issues"
   },
   "engines": {
-    "node": ">=20"
+    "node": ">=18"
   },
   "exports": {
     ".": "./dist/index.js"
