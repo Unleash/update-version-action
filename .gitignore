@@ -9,3 +9,6 @@ build
 *.iws
 .vim
 coverage
+tsconfig.tsbuildinfo
+__mocks__/**/*.js
+__mocks__/**/*.js.map
