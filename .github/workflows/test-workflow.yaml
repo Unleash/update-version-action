@@ -26,7 +26,7 @@ jobs:
         uses: 'google-github-actions/auth@v1'
         with:
           workload_identity_provider: 'projects/340004706233/locations/global/workloadIdentityPools/gh-actions-pool/providers/github-actions-oidc'
-          service_account: 'version_update_sa@metrics-304612.iam.gserviceaccount.com'
+          service_account: 'versionUpdateSa@metrics-304612.iam.gserviceaccount.com'
       - name: Update version
         uses: Unleash/update-version-action@v0
         with:
