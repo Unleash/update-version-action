@@ -1,0 +1,11 @@
+node_modules
+./*.js
+dist
+build
+.project
+.idea
+*.iml
+*.ipr
+*.iws
+.vim
+coverage

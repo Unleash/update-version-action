@@ -1,0 +1,14 @@
+name: 'Update Unleash Version'
+description: 'Updates version entry for an Unleash distribution (OSS, Enterprise)'
+author: 'Bricks Software'
+inputs:
+  distribution:
+    description: 'Which distribution to update'
+    required: true
+  version:
+    description: 'Which version to update it to'
+    required: true
+
+runs:
+  using: 'node20'
+  main: 'dist/index.js'
