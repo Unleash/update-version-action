@@ -1,0 +1,30 @@
+name: Test workflow
+
+on:
+  workflow_dispatch:
+    inputs:
+      distribution:
+        description: "Distribution to update version for"
+        type: string
+        required: true
+      version:
+        description: "Which version to update to"
+        type: string
+        required: true
+
+jobs:
+  testrun:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Authenticate google IAM
+        uses: 'google-github-actions/auth@v1'
+        with:
+          workload_identity_provider: 'projects/340004706233/locations/global/workloadIdentityPools/gh-actions-pool/providers/github-actions-oidc'
+          service_account: 'version_update_sa@metrics-304612.iam.gserviceaccount.com'
+      - name: Update version
+        uses: Unleash/update-version-action@v0
+        with:
+          version: ${{ inputs.version }}
+          distribution: ${{ inputs.distribution }}
