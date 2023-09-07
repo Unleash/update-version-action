@@ -8,9 +8,13 @@
     "url": "git+https://github.com/Unleash/update-version-action.git"
   },
   "scripts": {
+    "bundle": "pnpm format:write && pnpm package",
+    "package": "ncc build src/index.ts --license licenses.txt",
     "build": "tsc --incremental",
     "lint": "eslint .",
-    "test": "jest"
+    "test": "jest",
+    "format:write": "prettier --write '**/*.ts'",
+    "format:check": "prettier --check '**/*.ts'"
   },
   "keywords": [
     "Github",
@@ -34,6 +38,7 @@
   "dependencies": {
     "@actions/core": "^1.10.0",
     "@google-cloud/bigquery": "^7.2.0",
+    "@vercel/ncc": "^0.38.0",
     "semver": "^7.5.4"
   },
   "devDependencies": {

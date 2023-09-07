@@ -25,10 +25,10 @@ jobs:
       - name: Authenticate google IAM
         uses: 'google-github-actions/auth@v1'
         with:
-          workload_identity_provider: 'projects/340004706233/locations/global/workloadIdentityPools/gh-actions-pool/providers/github-actions-oidc'
+          workload_identity_provider: 'projects/340004706233/locations/global/workloadIdentityPools/gh-actions-pool/providers/github-actions-oidc-unleash'
           service_account: 'versionUpdateSa@metrics-304612.iam.gserviceaccount.com'
       - name: Update version
-        uses: Unleash/update-version-action@v0
+        uses: ./
         with:
           version: ${{ inputs.version }}
           distribution: ${{ inputs.distribution }}
