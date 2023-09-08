@@ -10,11 +10,12 @@ async function updateVersion(distribution: string, version: SemVer) {
   const bigquery = new BigQuery();
   const query = `UPDATE ${MAIN_DATA_SET_NAME}.${VERSION_METADATA_TABLE_NAME} SET version = '${version.version}' WHERE distribution = '${distribution}'`;
   const options = {
-    query: query,
     location: "EU",
   };
-  const [job] = await bigquery.createQueryJob(options);
-  const [rows] = await job.getQueryResults();
+
+  await bigquery.dataset(MAIN_DATA_SET_NAME, options)
+      .table(VERSION_METADATA_TABLE_NAME)
+      .query(query);
 }
 
 export async function run(): Promise<void> {

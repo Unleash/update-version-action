@@ -39145,11 +39145,11 @@ async function updateVersion(distribution, version) {
     const bigquery = new bigquery_1.BigQuery();
     const query = `UPDATE ${exports.MAIN_DATA_SET_NAME}.${exports.VERSION_METADATA_TABLE_NAME} SET version = '${version.version}' WHERE distribution = '${distribution}'`;
     const options = {
-        query: query,
         location: "EU",
     };
-    const [job] = await bigquery.createQueryJob(options);
-    const [rows] = await job.getQueryResults();
+    await bigquery.dataset(exports.MAIN_DATA_SET_NAME, options)
+        .table(exports.VERSION_METADATA_TABLE_NAME)
+        .query(query);
 }
 async function run() {
     try {
