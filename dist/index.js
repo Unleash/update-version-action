@@ -39147,7 +39147,7 @@ async function updateVersion(distribution, version) {
     const query = `UPDATE ${project}.${exports.MAIN_DATA_SET_NAME}.${exports.VERSION_METADATA_TABLE_NAME} SET version = @version WHERE distribution = @distribution`;
     const options = {
         query,
-        location: "EU",
+        location: "europe-west3",
         params: {
             version: version.version,
             distribution: distribution,
