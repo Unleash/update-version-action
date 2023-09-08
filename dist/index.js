@@ -39143,7 +39143,8 @@ exports.MAIN_DATA_SET_NAME = "version";
 exports.VERSION_METADATA_TABLE_NAME = "version_metadata";
 async function updateVersion(distribution, version) {
     const bigquery = new bigquery_1.BigQuery();
-    const query = `UPDATE ${process.env.GCLOUD_PROJECT || "metrics-304612"}.${exports.MAIN_DATA_SET_NAME}.${exports.VERSION_METADATA_TABLE_NAME} SET version = @version WHERE distribution = @distribution`;
+    const project = process.env.GCLOUD_PROJECT || "metrics-304612";
+    const query = `UPDATE ${project}.${exports.MAIN_DATA_SET_NAME}.${exports.VERSION_METADATA_TABLE_NAME} SET version = @version WHERE distribution = @distribution`;
     const options = {
         query,
         location: "EU",
