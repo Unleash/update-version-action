@@ -9,4 +9,5 @@ export const BigQuery = jest.fn().mockReturnValue({
       query: jest.fn(),
     }),
   }),
+  query: jest.fn(),
 });
