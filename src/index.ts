@@ -8,14 +8,21 @@ export const VERSION_METADATA_TABLE_NAME = "version_metadata";
 
 async function updateVersion(distribution: string, version: SemVer) {
   const bigquery = new BigQuery();
-  const query = `UPDATE ${MAIN_DATA_SET_NAME}.${VERSION_METADATA_TABLE_NAME} SET version = '${version.version}' WHERE distribution = '${distribution}'`;
+
+  const query = `UPDATE ${VERSION_METADATA_TABLE_NAME} SET version = @version WHERE distribution = @distribution`;
   const options = {
+    query,
     location: "EU",
+    params: {
+      version: version.version,
+      distribution: distribution
+    }
   };
 
-  await bigquery.dataset(MAIN_DATA_SET_NAME, options)
+
+  await bigquery.dataset(MAIN_DATA_SET_NAME)
       .table(VERSION_METADATA_TABLE_NAME)
-      .query(query);
+      .query(options);
 }
 
 export async function run(): Promise<void> {

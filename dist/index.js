@@ -39143,13 +39143,18 @@ exports.MAIN_DATA_SET_NAME = "version";
 exports.VERSION_METADATA_TABLE_NAME = "version_metadata";
 async function updateVersion(distribution, version) {
     const bigquery = new bigquery_1.BigQuery();
-    const query = `UPDATE ${exports.MAIN_DATA_SET_NAME}.${exports.VERSION_METADATA_TABLE_NAME} SET version = '${version.version}' WHERE distribution = '${distribution}'`;
+    const query = `UPDATE ${exports.VERSION_METADATA_TABLE_NAME} SET version = @version WHERE distribution = @distribution`;
     const options = {
+        query,
         location: "EU",
+        params: {
+            version: version.version,
+            distribution: distribution
+        }
     };
-    await bigquery.dataset(exports.MAIN_DATA_SET_NAME, options)
+    await bigquery.dataset(exports.MAIN_DATA_SET_NAME)
         .table(exports.VERSION_METADATA_TABLE_NAME)
-        .query(query);
+        .query(options);
 }
 async function run() {
     try {
