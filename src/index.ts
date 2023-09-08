@@ -8,7 +8,7 @@ export const VERSION_METADATA_TABLE_NAME = "version_metadata";
 
 async function updateVersion(distribution: string, version: SemVer) {
   const bigquery = new BigQuery();
-  const query = `UPDATE ${MAIN_DATA_SET_NAME}.${VERSION_METADATA_TABLE_NAME} SET version = ${version.version} WHERE distribution = ${distribution}`;
+  const query = `UPDATE ${MAIN_DATA_SET_NAME}.${VERSION_METADATA_TABLE_NAME} SET version = '${version.version}' WHERE distribution = '${distribution}'`;
   const options = {
     query: query,
     location: "EU",
