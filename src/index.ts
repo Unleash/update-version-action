@@ -9,7 +9,9 @@ export const VERSION_METADATA_TABLE_NAME = "version_metadata";
 async function updateVersion(distribution: string, version: SemVer) {
   const bigquery = new BigQuery();
 
-  const query = `UPDATE ${process.env.GCLOUD_PROJECT || 'metrics-304612'}.${MAIN_DATA_SET_NAME}.${VERSION_METADATA_TABLE_NAME} SET version = @version WHERE distribution = @distribution`;
+  const query = `UPDATE ${
+    process.env.GCLOUD_PROJECT || "metrics-304612"
+  }.${MAIN_DATA_SET_NAME}.${VERSION_METADATA_TABLE_NAME} SET version = @version WHERE distribution = @distribution`;
   const options = {
     query,
     location: "EU",
@@ -19,8 +21,7 @@ async function updateVersion(distribution: string, version: SemVer) {
     },
   };
 
-  await bigquery
-    .query(options);
+  await bigquery.query(options);
 }
 
 export async function run(): Promise<void> {
