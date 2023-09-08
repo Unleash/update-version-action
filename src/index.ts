@@ -15,14 +15,14 @@ async function updateVersion(distribution: string, version: SemVer) {
     location: "EU",
     params: {
       version: version.version,
-      distribution: distribution
-    }
+      distribution: distribution,
+    },
   };
 
-
-  await bigquery.dataset(MAIN_DATA_SET_NAME)
-      .table(VERSION_METADATA_TABLE_NAME)
-      .query(options);
+  await bigquery
+    .dataset(MAIN_DATA_SET_NAME)
+    .table(VERSION_METADATA_TABLE_NAME)
+    .query(options);
 }
 
 export async function run(): Promise<void> {

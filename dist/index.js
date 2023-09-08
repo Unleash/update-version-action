@@ -39149,10 +39149,11 @@ async function updateVersion(distribution, version) {
         location: "EU",
         params: {
             version: version.version,
-            distribution: distribution
-        }
+            distribution: distribution,
+        },
     };
-    await bigquery.dataset(exports.MAIN_DATA_SET_NAME)
+    await bigquery
+        .dataset(exports.MAIN_DATA_SET_NAME)
         .table(exports.VERSION_METADATA_TABLE_NAME)
         .query(options);
 }
